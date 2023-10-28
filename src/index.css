@@ -1,0 +1,10 @@
+/*alternative dependecies if the one is not working */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* if this is not working use the other one
+@tailwind base;
+@tailwind components;
+@tailwind utilities; */

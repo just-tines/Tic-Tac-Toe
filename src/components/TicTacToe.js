@@ -1,7 +1,7 @@
 // src/components/TicTacToe.js
 import React, { useState } from "react";
 import Board from "./Board.js";
-
+import WinnerModal from "./WinnerModal.js";
 const calculateWinner = (squares) => {
   
   const lines = [
@@ -27,26 +27,46 @@ const calculateWinner = (squares) => {
 const TicTacToe = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [winner, setWinner] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = (i) => {
-    const squaresCopy = [...squares];
-
-    if (calculateWinner(squaresCopy) || squaresCopy[i]) {
+    if (winner || squares[i]) {
       return;
     }
 
+    const squaresCopy = [...squares];
     squaresCopy[i] = xIsNext ? "X" : "O";
     setSquares(squaresCopy);
     setXIsNext(!xIsNext);
+
+    const gameWinner = calculateWinner(squaresCopy);
+    if (gameWinner) {
+      setWinner(gameWinner);
+      setIsModalOpen(true);
+    }
   };
 
-  const winner = calculateWinner(squares);
+  const handlePlayAgain = () => {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setWinner(null);
+    setIsModalOpen(false);
+  };
+
   const status = winner
     ? "Winner: " + winner
     : "Next player: " + (xIsNext ? "X" : "O");
 
   return (
-    <Board squares={squares} onClick={handleClick} status={status} />
+    <div>
+      <Board squares={squares} onClick={handleClick} status={status} />
+      <WinnerModal
+        isOpen={isModalOpen}
+        winner={winner}
+        onPlayAgain={handlePlayAgain}
+      />
+    </div>
   );
 };
 

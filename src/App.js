@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Tic-Tac-Toe</h1>
+        <h1 className="flex flex-col p-5 text-[24px] bg-blue-400 font-semibold justify-center items-center">Tic-Tac-Toe</h1>
       </header>
       <main className="App-main">
         <TicTacToe />

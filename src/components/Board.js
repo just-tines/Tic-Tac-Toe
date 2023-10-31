@@ -3,10 +3,10 @@ import Square from "./Squares";
 
 const Board = ({ squares, onClick, status }) => {
   return (
-    <div className="bg-slate-600 p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-blue-500 shadow-lg">
       <div className="text-center text-2xl font-semibold mb-4">{status}</div>
-      <div className="w-60  mx-auto">
-        <div className="grid grid-cols-3 ">
+      <div className="w-60">
+        <div className="grid grid-cols-3">
           {Array.from({ length: 9 }).map((_, i) => (
             <div key={i}>{renderSquare(i)}</div>
           ))}
